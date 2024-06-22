@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<HospitalOficialCRUD.Models.Pacientes>;
+<div class="row">
+    <div class="col-sm-8 offset-sm-2">
+        <h2>Lista Pacientes</h2>
+        <a asp-controller="Pacientes" asp-action="Nuevo" class="btn btn-success mb-3">Nuevo</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Rut</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Direccion</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Fono Paciente</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdPaciente</td>
+                        <td>@item.RutPaciente</td>
+                        <td>@item.NombrePaciente</td>
+                        <td>@item.ApellidoPaciente</td>
+                        <td>@item.DireccionPaciente</td>
+                        <td>@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+                        <td>@item.FonoPaciente</td>
+
+                        <td>
+                            <a asp-controller="Pacientes" 
+                            asp-action="Editar" 
+                            asp-route-idPaciente="@item.IdPaciente"
+                            class="btn btn-primary">
+                            Editar</a>
+                        </td>
+
+                        <td>
+                            <a asp-controller="Pacientes"
+                               asp-action="Eliminar"
+                               asp-route-idPaciente="@item.IdPaciente"
+                               onclick="return confirmar()"
+                               class="btn btn-danger">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>    
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Funcion para validar confirmacion -->
+@section Scripts {
+    <script>
+        function confirmar(){
+            return confirmar("Está seguro de que sea eliminar al paciente?")
+        }
+    </script>
+
+
+}
